@@ -9,18 +9,15 @@ struct Rectangle {
 }
 
 impl Rectangle {
-    // Can use dot syntax
+    // Can use . syntax
     fn area(&self) -> f32 {
         let height = self.top_left.y - self.bottom_right.y; 
         let width = self.bottom_right.x - self.top_left.x;
         height * width
     }
 
-    // Requires fucked up syntax -- see below
+    // Use the :: syntax
     fn get_area(top_left: Point, bottom_right: Point) -> f32{
-    // This is not in the scope of main(?) when used as a .method()
-    // For whatever brilliant reason rust uses the syntax
-    // Rectangle::get_area(Point, Point);
         let height: f32 = top_left.y - bottom_right.y;
         let width: f32 = bottom_right.x - top_left.x;
         height * width
@@ -43,7 +40,7 @@ fn main() {
         bottom_right: Point{ x: 1.0, y: 2.0 },
     };
 
-    // Can't do both because of `partial borrow` whatever that is
+    // Can't do both because of `partial borrow`
     // println!("{}", Rectangle::get_area(rect.top_left, rect.bottom_right));
     println!("{}", rect.area());
 }
